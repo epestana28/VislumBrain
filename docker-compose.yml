@@ -1,0 +1,17 @@
+# Qdrant só deste projecto. Portas próprias para não colidir com outras instâncias locais.
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.17.0
+    container_name: vislumbrain-qdrant
+    # Corre com o teu utilizador, para a pasta qdrant_storage não ficar do root e poderes apagá-la sem sudo.
+    user: "${VB_UID:-1000}:${VB_GID:-1000}"
+    ports:
+      - "127.0.0.1:6343:6333"
+      - "127.0.0.1:6344:6334"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+    environment:
+      # Sem isto o Qdrant tenta criar as pastas de snapshots dentro da imagem, que é do root, e falha ao arrancar.
+      QDRANT__STORAGE__SNAPSHOTS_PATH: /qdrant/storage/snapshots
+      QDRANT__STORAGE__TEMP_PATH: /qdrant/storage/tmp
+    restart: unless-stopped

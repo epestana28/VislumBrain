@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Atalho: ./vislumbrain <comando>. Usa o venv do projecto, sem ser preciso activá-lo.
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export PYTHONPATH="$here/src${PYTHONPATH:+:$PYTHONPATH}"
+exec "$here/.venv/bin/python" -m vislumbrain "$@"

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+# Gerado: contém excertos literais do texto lido, nunca deve ir para o git
+data/
+vault/
+qdrant_storage/
+# Texto de terceiros e texto privado ficam fora do repositório
+# Só o corpus de exemplo vai para o git. Qualquer outra pasta em corpus/ fica de fora.
+corpus/*
+!corpus/sample/
